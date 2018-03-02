@@ -3,6 +3,11 @@ This contains all the code and libraries
 Please download all the files in this repository 
 so you can use the library and headers
 
+
+Spencer If you use these for matlab you dont the the controlSystem.ino file
+make your own main file.
+
+
 rotary encoders use pull up resistors.
 pinA = left and pinB = right it doesnt really matter just use the constructor
 
