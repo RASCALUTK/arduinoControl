@@ -9,17 +9,20 @@ relay::relay(int p) {
 }
 
 void relay::set(int x) {
+  // I am using the normally open relay pins
+  // that is the reason for this code
+  
   if (x == 1) {
-    // connecting the pin to ground will turn it on
-    //that is strange but it does work
+    // connecting the pin to HIGH will turn it off    
     onOff = true;
-    digitalWrite(pin, LOW);
+    digitalWrite(pin, HIGH);
     return;
   } else {
-    //also making it high will turn it off
+    //also making it low HIGH turn it off
     onOff = false;
-    digitalWrite(pin, HIGH);
+    digitalWrite(pin, LOW);
   }
   return;
+  
 }
 
