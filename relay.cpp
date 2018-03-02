@@ -12,9 +12,10 @@ void relay::set(int x) {
     onOff = true;
     digitalWrite(pin, LOW);
     return;
-  } else
+  } else {
     onOff = false;
-  digitalWrite(pin, HIGH);
+    digitalWrite(pin, HIGH);
+  }
   return;
 }
 
