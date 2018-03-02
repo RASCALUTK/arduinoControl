@@ -1,3 +1,4 @@
+
 #include "control.h"
 
 linAct::linAct(int pinA, int pinB, int pinC) {

@@ -1,12 +1,12 @@
+
 #include <LiquidCrystal.h>
 #include <stdio.h>
 #include <Arduino.h>
-
 #include"sensors.h"
+
 // this is neccesary so it does not add multiple times
 #ifndef control_h
 #define control_h
-
 
 
 class stepperMotor {
@@ -25,7 +25,6 @@ class stepperMotor {
     void isMinMax();
 };
 
-
 class hBridge {
   public:
     int pin1, pin2;
@@ -35,6 +34,7 @@ class hBridge {
     void reverse();
 
 };
+
 class linAct {
   public:
     int potVal, pwm, minVal, maxVal;

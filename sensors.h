@@ -1,5 +1,4 @@
 
-
 #ifndef sensors_h
 #define sensors_h
 
@@ -27,6 +26,15 @@ class forceSensor {
     int pinA, PinB, force;
     forceSensor(int pin1, int pint2);
     void forceRead();
+};
+
+class wattMeter {
+  public:
+    int pin1, pin2, current, powerVA;
+    bool ac, dc;
+    wattMeter(int pinA, int PinB, bool type);
+    void readCurrent();
+    void calculatePower();
 };
 
 #endif
