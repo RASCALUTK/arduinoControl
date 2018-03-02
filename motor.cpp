@@ -16,10 +16,8 @@ stepperMotor::stepperMotor(int pinE, int pinD, int pinPWM, int limSwiMax, int li
   pinLimMax = limSwiMax;
   pinMode (pinLimMin, INPUT);
   pinMode (pinLimMax, INPUT);
-
   dir = true;
   enable = false;
-
   //checks to see if it is on the end
   isMinMax();
 

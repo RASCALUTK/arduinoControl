@@ -8,27 +8,24 @@ String x = "N";
 String y = "N";
 String z = "N";
 
+//constructor for rotary encoder with Button
+// rotEncBut(int pinSwi, int pinA, int pinB);
+//these are globals now
+rotEncBut rotX = rotEncBut(51,50,49);
 void setup() {
   lcd.begin(16, 2);
   lcd.print("X    Y     Z");
   Serial.begin (9600);
-  // Reads the initial state of the outputA
 }
 
-//constructor for rotary encoder with Button
-// rotEncBut(int pinSwi, int pinA, int pinB);
-//these are globals 
-rotEncBut rotX(51, 50, 49);
-rotEncBut rotY(48, 47, 46);
-
 void loop() {
-  Serial.println(rotX.count);
-  rotX.encoder();
-  rotY.encoder();
+ Serial.println(rotX.count);
+  // calls the encoder function in rotEncBut
+
+
   lcd.setCursor(0, 0);
   lcd.print("X:" + x +  " Y:" + y + " Z:" + z);
   lcd.setCursor(0, 1);
-  lcd.print( String(rotX.count) + " " + String (rotX.count ));
 }
 
 
