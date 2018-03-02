@@ -11,14 +11,14 @@ relays are low to turn on
 connect stepper motor negative pins to ground. 
 
 parts List:
-	sainsmart 2 relay module
-	ln298 Hbridge
-	Arduino Due or uno
-	pull up/down resistors 1k
-	16x2 LCD check wiring schematic
-	stepper motor driver
-	power supply
-	boost buck converter
+	sainsmart 2 relay module,
+	ln298 Hbridge,
+	Arduino Due or uno,
+	pull up/down resistors 1k,
+	16x2 LCD (check wiring schematic),
+	stepper motor driver,
+	power supply,
+	boost buck converter,
 	
 
 
