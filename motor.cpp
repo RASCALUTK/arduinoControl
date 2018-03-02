@@ -20,7 +20,6 @@ stepperMotor::stepperMotor(int pinE, int pinD, int pinPWM, int limSwiMax, int li
   enable = false;
   //checks to see if it is on the end
   isMinMax();
-
   return;
 }
 

@@ -1,5 +1,3 @@
-
-
 #include <LiquidCrystal.h>
 #include <stdio.h>
 #include <String.h>
@@ -50,18 +48,24 @@ class hBridge {
 };
 class linAct {
   public:
-    int potVal, pwm, minVal,maxVal;
+    int potVal, pwm, minVal, maxVal;
     int pinPot, pin1, pin2;
+    //constructor
     linAct(int pinA, int pinB, int pinC);
     void off();
     void forward();
     void reverse();
+    // toMin and toMax will stop all code until they reahc their end
+    void toMax();
+    void toMin();
   private:
+    // uses hBridge class since it uses hbridge
     hBridge* hB;
 };
 
 class relay {
   public:
+    //constructor]
     relay(int p);
     int pin;
     bool onOff;

@@ -1,4 +1,3 @@
-
 #include "control.h"
 
 rotEncBut::rotEncBut(int pinSwi, int pinA, int pinB) {
@@ -17,7 +16,7 @@ rotEncBut::rotEncBut(int pinSwi, int pinA, int pinB) {
 void rotEncBut::encoder() {
   //read state
   state = digitalRead(outputA);
-//compare to prevstate
+  //compare to prevstate
   if (state != lastState) {
     if (digitalRead(outputB) != state) {
       count++;
@@ -26,8 +25,8 @@ void rotEncBut::encoder() {
     }
     Serial.print("Position: " + count);
   }
-//change state
-  lastState = state; 
+  //change state
+  lastState = state;
   return;
 }
 
