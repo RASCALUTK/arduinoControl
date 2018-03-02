@@ -14,6 +14,7 @@ pinA = left and pinB = right it doesnt really matter just use the constructor
 
 relays are low to turn on
 
+
 connect stepper motor negative pins to ground. 
 
 parts List:
