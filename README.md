@@ -4,8 +4,9 @@ Please download all the files in this repository
 so you can use the library and headers
 
 
-Spencer If you use these for matlab you dont the the controlSystem.ino file
+/n Spencer If you use these for matlab you dont the the controlSystem.ino file
 make your own main file.
+
 
 
 rotary encoders use pull up resistors.
