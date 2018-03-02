@@ -2,27 +2,31 @@
 #include <LiquidCrystal.h>
 #include <stdio.h>
 #include <Arduino.h>
-#include"sensors.h"
 
 // this is neccesary so it does not add multiple times
 #ifndef control_h
 #define control_h
 
+#include"sensors.h"
+
 
 class stepperMotor {
   public:
     // pins used for motor
-    int  pinDir, pinEnable, pinPwm, pinLimMin, pinLimMax;
+    int  pinDir, pinEnable, pinPul, pinLimMin, pinLimMax;
     //variables
     int posMax, posMin, pos, pwm;
     bool dir, enable, isMax, isMin;
-    stepperMotor(int pinE, int pinD, int pinPWM, int limSwiMax, int limSwiMin);
+    stepperMotor(int pinE, int pinD, int pinPulse, int limSwiMax, int limSwiMin);
     //spins motor
     void spin();
     //helper functions
     void setMax();
     void setMin();
     void isMinMax();
+    void enableDisable();
+    void pwmSet(int newPwm);
+    void stepM();
 };
 
 class hBridge {

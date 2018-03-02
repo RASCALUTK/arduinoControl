@@ -10,7 +10,7 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 //relay(int pin)
 relay motor = relay(33);
 
-//stepperMotor(int pinEnable, int pinDisable, int pinPWM, int limitSwitchMax, int limSwiMin);
+//stepperMotor(int pinEnable, int pinDisable, int pinPul, int limitSwitchMax, int limSwiMin);
 stepperMotor xAxis = stepperMotor(50, 49, 11, 48, 47);
 
 //hBridge(int pinA, int pinB)
@@ -24,24 +24,21 @@ linAct lA = linAct(44, 43, A0);
 rotEncBut counter = rotEncBut(42,41,40);
 */
 
-int x = 22;
+//USBHost usb;
 
 void setup() {
   lcd.begin(16, 2);
   Serial.begin (9600);
-  pinMode (x, INPUT);
+//  pinMode (x, INPUT);
 
 }
 
-void loop() {
-  //  Serial.println(rotX.count);
-  // calls the encoder function in rotEncBut
-  if (digitalRead(x) == HIGH) {
-    motor.set(0);
-  } else {
-    motor.set(1);
-  }
+stepperMotor xAxis = stepperMotor(6, 10, 8, 48, 47);
 
+void loop() {
+Serial.print("Does this work");
+xAxis.stepM();
+delay(30);
 }
 
 

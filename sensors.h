@@ -2,6 +2,8 @@
 #ifndef sensors_h
 #define sensors_h
 
+#include "control.h"
+
 class rotEncBut {
   public:
     int count, state, lastState, outButt, outputA, outputB;

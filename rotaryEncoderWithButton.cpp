@@ -1,6 +1,5 @@
 
 #include "sensors.h"
-#include "control.h"
 
 rotEncBut::rotEncBut(int pinSwi, int pinA, int pinB) {
   //sets all variables in the rotEncBut class
