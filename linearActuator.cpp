@@ -1,13 +1,15 @@
 
 #include "control.h"
 
-linAct::linAct(int pinA, int pinB, int pinC) {
+linAct::linAct(int pinA, int pinB, int pinC, int pinD) {
+  Serial.print("setup start");
   pinPot = pinC;
   pin1 = pinA;
   pin2 = pinB;
-  hB = new hBridge(pin1, pin2);
+  hB = new hBridge(pin1, pin2, pinD);
   off();
-  potVal = analogRead(pinPot);
+  readVal();
+  Serial.print("setup complete");
 }
 
 void linAct::off() {
@@ -16,7 +18,12 @@ void linAct::off() {
   return;
 }
 
+void linAct::readVal() {
+  potVal = analogRead(pinPot);
+  return;
+}
 void linAct::forward() {
+  potVal = analogRead(pinPot);
   if (potVal != maxVal) {
     // uses the hBridge function
     hB->forward();
@@ -25,6 +32,7 @@ void linAct::forward() {
 }
 
 void linAct::reverse() {
+  potVal = analogRead(pinPot);
   if (potVal != minVal) {
     // uses the hBridge function
     hB->reverse();
@@ -34,7 +42,7 @@ void linAct::reverse() {
 
 void linAct::toMin() {
   while (potVal != minVal) {
-    reverse();
+    reverse();    
   }
   off();
   return;

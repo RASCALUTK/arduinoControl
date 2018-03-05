@@ -15,7 +15,7 @@ class stepperMotor {
     // pins used for motor
     int  pinDir, pinEnable, pinPul, pinLimMin, pinLimMax;
     //variables
-    int posMax, posMin, pos, pwm;
+    int posMax, posMin, pos, pwm,delayTime;
     bool dir, enable, isMax, isMin;
     stepperMotor(int pinE, int pinD, int pinPulse, int limSwiMax, int limSwiMin);
     //spins motor
@@ -27,13 +27,17 @@ class stepperMotor {
     void enableDisable();
     void pwmSet(int newPwm);
     void stepM();
+    void forward();
+    void reverse();
+    void badPwm();
 };
 
 class hBridge {
   public:
-    int pin1, pin2;
-    hBridge(int pinA, int pinB);
+    int pin1, pin2, pinE;
+    hBridge(int pinA, int pinB,int pinC);
     void off();
+    void on();
     void forward();
     void reverse();
 
@@ -44,16 +48,18 @@ class linAct {
     int potVal, pwm, minVal, maxVal;
     int pinPot, pin1, pin2;
     //constructor
-    linAct(int pinA, int pinB, int pinC);
+    linAct(int pinA, int pinB, int pinC,int pinD);
     void off();
     void forward();
     void reverse();
     // toMin and toMax will stop all code until they reahc their end
     void toMax();
     void toMin();
+    void readVal();
+    hBridge* hB;
+
   private:
     // uses hBridge class since it uses hbridge
-    hBridge* hB;
 };
 
 class relay {
