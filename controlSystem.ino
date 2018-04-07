@@ -26,8 +26,7 @@
 //USBHost usb;
 int number = 5;
 linAct lA = linAct(5, 4, A0,11);
-person matt = person(21,"Matt",'M');
-person kea = person(22,"kea",'f');
+
 void setup() {
   //lcd.begin(16, 2);
   Serial.begin (9600);
@@ -45,11 +44,6 @@ void loop() {
 //lA.toMax();
 //delay(50);
 //lA.toMin();
-number = matt.returnAge();
-matt.getName();
-kea.getName();
-Serial.println(number);
-Serial.println(matt.gender);
 
 /*
   if (SerialUSB.available()) {

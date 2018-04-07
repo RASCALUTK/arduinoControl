@@ -44,17 +44,6 @@ class hBridge {
 
 };
 
-class person{
-  private:
-  public:
-  person(int a,String n,char g);
-  String firstName;
-  int age;
-  char gender;
-  void getName();
-  int returnAge();
-};
-
 class linAct {
   public:
     int potVal, pwm;
