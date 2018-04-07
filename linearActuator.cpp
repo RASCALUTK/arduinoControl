@@ -7,11 +7,18 @@ linAct::linAct(int pinA, int pinB, int pinC, int pinD) {
   pin1 = pinA;
   pin2 = pinB;
   hB = new hBridge(pin1, pin2, pinD);
+  minVal = 216;
+  maxVal = 806;
   off();
   readVal();
   Serial.print("setup complete");
 }
 
+void linAct::printVal(){
+  readVal();
+  Serial.println(potVal);
+  return;
+}
 void linAct::off() {
   // uses the hBridge function
   hB->off();
@@ -42,14 +49,14 @@ void linAct::reverse() {
 
 void linAct::toMin() {
   while (potVal != minVal) {
-    reverse();    
+    forward();    
   }
   off();
   return;
 }
 void linAct::toMax() {
   while (potVal != maxVal) {
-    forward();
+    reverse();
   }
   off();
   return;

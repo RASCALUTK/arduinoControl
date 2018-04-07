@@ -9,6 +9,7 @@
 
 #include"sensors.h"
 
+#include "max6675.h"
 
 class stepperMotor {
   public:
@@ -43,9 +44,21 @@ class hBridge {
 
 };
 
+class person{
+  private:
+  public:
+  person(int a,String n,char g);
+  String firstName;
+  int age;
+  char gender;
+  void getName();
+  int returnAge();
+};
+
 class linAct {
   public:
-    int potVal, pwm, minVal, maxVal;
+    int potVal, pwm;
+    double minVal, maxVal;
     int pinPot, pin1, pin2;
     //constructor
     linAct(int pinA, int pinB, int pinC,int pinD);
@@ -56,6 +69,7 @@ class linAct {
     void toMax();
     void toMin();
     void readVal();
+    void printVal();
     hBridge* hB;
 
   private:

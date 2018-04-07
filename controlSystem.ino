@@ -1,8 +1,8 @@
 
 #include "control.h"
 
-const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
-LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
+//const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
+//LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
 /*
   //examples of how to initialize a new componant
@@ -24,10 +24,12 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 */
 
 //USBHost usb;
-linAct lA = linAct(44, 43, A0,11);
-
+int number = 5;
+linAct lA = linAct(5, 4, A0,11);
+person matt = person(21,"Matt",'M');
+person kea = person(22,"kea",'f');
 void setup() {
-  lcd.begin(16, 2);
+  //lcd.begin(16, 2);
   Serial.begin (9600);
   Serial.println("hello");
  // SerialUSB.begin(9600);
@@ -39,12 +41,15 @@ void setup() {
 
 void loop() {
  // 
-digitalWrite(7,HIGH);
-digitalWrite(8,LOW);
-delay(60000);
-digitalWrite(7,LOW);
-digitalWrite(8,HIGH);
-delay(60000);
+//lA.printVal();
+//lA.toMax();
+//delay(50);
+//lA.toMin();
+number = matt.returnAge();
+matt.getName();
+kea.getName();
+Serial.println(number);
+Serial.println(matt.gender);
 
 /*
   if (SerialUSB.available()) {
