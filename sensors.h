@@ -32,11 +32,14 @@ class forceSensor {
 
 class wattMeter {
   public:
-    int pin1, pin2, current, powerVA;
+    int sensorOut, current, powerVA;
+    int mVperAmp;
+    double voltage,vRMS,ampsRMS;
     bool ac;
-    wattMeter(int pinA, int PinB, bool type);
+    wattMeter(int pinA, bool type);
     void readCurrent();
     void calculatePower();
+    float getVPP();
 };
 
 #endif
