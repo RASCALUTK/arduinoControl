@@ -6,10 +6,8 @@
 
 /*
   //examples of how to initialize a new componant
-
   //relay(int pin)
   relay motor = relay(33);
-
   //stepperMotor(int pinEnable, int pinDisable, int pinPul, int limitSwitchMax, int limSwiMin);
   stepperMotor xAxis = stepperMotor(50, 49, 11, 48, 47);
 
@@ -24,8 +22,7 @@
 */
 
 //USBHost usb;
-int number = 5;
-linAct lA = linAct(5, 4, A0,11);
+
 
 void setup() {
   //lcd.begin(16, 2);
@@ -39,11 +36,12 @@ void setup() {
 //stepperMotor xAxis = stepperMotor(6, 10, 8, 48, 47);
 
 void loop() {
- // 
-//lA.printVal();
-//lA.toMax();
-//delay(50);
-//lA.toMin();
+//Serial.println(thermo.readFahrenheit());
+delay(1000);
+
+
+
+
 
 /*
   if (SerialUSB.available()) {
