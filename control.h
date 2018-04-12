@@ -5,17 +5,24 @@
 // this is neccesary so it does not add multiple times
 #ifndef control_h
 #define control_h
-
 #include"sensors.h"
-
 #include "max6675.h"
+
+void inputControl(String input);
+void stepperControl(String command);
+void vfdControl(String command);
+void heaterControl(String command);
+void linActControl(String command);
+void thermoControl(String command);
+void pumpControl(String command);
+void forceControl(String command);
 
 class stepperMotor {
   public:
     // pins used for motor
     int  pinDir, pinEnable, pinPul, pinLimMin, pinLimMax;
     //variables
-    int posMax, posMin, pos, pwm,delayTime;
+    int posMax, posMin, pos, pwm, delayTime;
     bool dir, enable, isMax, isMin;
     stepperMotor(int pinE, int pinD, int pinPulse, int limSwiMax, int limSwiMin);
     //spins motor
@@ -35,7 +42,7 @@ class stepperMotor {
 class hBridge {
   public:
     int pin1, pin2, pinE;
-    hBridge(int pinA, int pinB,int pinC);
+    hBridge(int pinA, int pinB, int pinC);
     void off();
     void on();
     void forward();
@@ -49,7 +56,7 @@ class linAct {
     double minVal, maxVal;
     int pinPot, pin1, pin2;
     //constructor
-    linAct(int pinA, int pinB, int pinC,int pinD);
+    linAct(int pinA, int pinB, int pinC, int pinD);
     void off();
     void forward();
     void reverse();
