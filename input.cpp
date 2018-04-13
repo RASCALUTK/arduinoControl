@@ -39,10 +39,14 @@ void inputControl(String input) {
 }
 
 
-void stepperControl(String command){
-    
+void stepperControl(String command) {
 
+  // get name
+   
+  // get enable
 
-  
+  //speed
+
+  //direction
 }
 

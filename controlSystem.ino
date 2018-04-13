@@ -43,7 +43,7 @@ void setup() {
   OCR1A  = (unsigned long)((62500UL / frequency) - 1UL);//our clock runs at 62.5kHz, which is 1/62.5kHz = 16us
   interrupts();//restart interrupts
   pinMode(13, OUTPUT);
-  pinMode(4,OUTPUT);
+  pinMode(4, OUTPUT);
   //while (!SerialUSB.available());
 }
 
@@ -54,7 +54,8 @@ MAX6675 thermo = MAX6675(8, 9, 10);
 //stepperMotor xAxis = stepperMotor(6, 10, 8, 48, 47);
 
 void loop() {
-  analogWrite(4,5);
+  analogWrite(4, 1);
+  
   for (int i = 0; i < 10; i++) {
     Serial.print("sec: ");
     Serial.println(i);
