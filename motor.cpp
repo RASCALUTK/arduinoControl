@@ -5,29 +5,44 @@ stepperMotor::stepperMotor(int pinE, int pinD, int pinPulse, int limSwiMax, int 
   //direction pin
   pinDir = pinD;
   pinMode(pinDir, OUTPUT);
-  
+
   //enable pin
   pinEnable = pinE;
   pinMode(pinEnable, OUTPUT);
-  
+
   //pwm pin TEST THIS ON multiple motors
   pinPul = pinPulse;
   pinMode(pinPul, OUTPUT);
-  pwm = 0;
-  
+  pwm = 10;
+
   //limit swithces
   pinLimMin = limSwiMin;
   pinLimMax = limSwiMax;
   pinMode (pinLimMin, INPUT);
   pinMode (pinLimMax, INPUT);
-  
+
   dir = true;
   enable = false;
   enableDisable();
   //checks to see if it is on the end
   isMinMax();
   return;
+}
 
+void stepperMotor::direc() {
+  enable = false;
+  enableDisable();
+  delay(2);
+  if (dir) {
+    digitalWrite(pinDir, LOW);
+  }
+  else {
+    digitalWrite(pinDir, HIGH);
+  }
+  delay(2);
+  enable = true;
+  enableDisable();
+  return;
 }
 
 void stepperMotor::spin() {
@@ -35,9 +50,9 @@ void stepperMotor::spin() {
   if ((isMax && dir ) || (isMin && !dir)) {
     return;
   }
-  enable = true;
-  enableDisable();
+  direc();
   analogWrite(pinPul, pwm);
+  return;
 }
 
 
@@ -51,6 +66,7 @@ void stepperMotor::isMinMax() {
   }
   isMax = false;
   isMin = false;
+  return;
 }
 
 void stepperMotor::setMin() {
@@ -58,9 +74,11 @@ void stepperMotor::setMin() {
   if (isMin) {
     return;
   }
-  // set dir
-  //while()
-  //spin()
+  dir = false;
+  while (!isMin) {
+    spin();
+  }
+  return;
 }
 
 void stepperMotor::setMax() {
@@ -68,13 +86,16 @@ void stepperMotor::setMax() {
   if (isMax) {
     return;
   }
-  //set dir
-  //while()
-  //spin()
+  dir = true;
+  while (!isMax) {
+    spin();
+  }
+  return;
 }
 
 void stepperMotor::pwmSet(int newPwm) {
   pwm = newPwm;
+  return;
 }
 
 
@@ -84,6 +105,7 @@ void stepperMotor::enableDisable() {
   } else {
     digitalWrite(pinEnable, HIGH);
   }
+  return;
 }
 
 // does a step

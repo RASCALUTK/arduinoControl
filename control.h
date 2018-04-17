@@ -37,6 +37,7 @@ class stepperMotor {
     void forward();
     void reverse();
     void badPwm();
+    void direc();
 };
 
 class hBridge {

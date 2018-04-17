@@ -42,8 +42,8 @@ void setup() {
   TIMSK1 = B00000010;//bit 1 set to call the interrupt on an OCR1A match
   OCR1A  = (unsigned long)((62500UL / frequency) - 1UL);//our clock runs at 62.5kHz, which is 1/62.5kHz = 16us
   interrupts();//restart interrupts
-  pinMode(13, OUTPUT);
-  pinMode(4, OUTPUT);
+  pinMode(53, OUTPUT);
+  //pinMode(4, OUTPUT);
   //while (!SerialUSB.available());
 }
 
@@ -51,16 +51,23 @@ void setup() {
 volatile int seconds = 0;
 MAX6675 thermo = MAX6675(8, 9, 10);
 //linAct lA = linAct(42, 43, A0);
-//stepperMotor xAxis = stepperMotor(6, 10, 8, 48, 47);
+//stepperMotor(int pinE, int pinD, int pinPulse, int limSwiMax, int limSwiMin
 
+stepperMotor xAxis = stepperMotor(30, 32, 4, 48, 47);
+stepperMotor yAxis = stepperMotor(37, 39, 13, 44, 45);
 void loop() {
-  analogWrite(4, 1);
-  
-  for (int i = 0; i < 10; i++) {
-    Serial.print("sec: ");
-    Serial.println(i);
-    delay(1000);
-  }
+  xAxis.pwm = 10;
+  xAxis.dir = 1;
+  xAxis.spin();
+  yAxis.pwm = 10;
+  yAxis.dir = 1;
+  yAxis.spin();
+  delay(3000);
+  xAxis.dir = 0;
+  xAxis.spin();
+  yAxis.dir = 0;
+  yAxis.spin();
+  delay(3000);
 
 
 
@@ -80,6 +87,6 @@ ISR(TIMER1_COMPA_vect) {
   if (seconds >= 10) { //set to however many seconds you want
     Serial.println(micros());           // This code is what happens
     seconds = 0;                        // after 'x' seconds
-    digitalWrite(13, !digitalRead(13)); //
+    digitalWrite(53, !digitalRead(53)); //
   }
 }
