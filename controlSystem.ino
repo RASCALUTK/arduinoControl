@@ -21,7 +21,7 @@
 */
 
 //USBHost usb;
-
+Adafruit_TMP007 tmp(0x40);
 void setup() {
   noInterrupts();// kill interrupts until everybody is set up
   //lcd.begin(16, 2);
@@ -45,6 +45,13 @@ void setup() {
   pinMode(53, OUTPUT);
   //pinMode(4, OUTPUT);
   //while (!SerialUSB.available());
+  pinMode(A4, OUTPUT);
+  pinMode(A7, INPUT);
+  /* tmp.begin(TMP007_CFG_1SAMPLE);
+    if (! tmp.begin()) {
+     Serial.println("No sensor found");
+     while (1);
+    }*/
 }
 
 
@@ -53,24 +60,16 @@ MAX6675 thermo = MAX6675(8, 9, 10);
 //linAct lA = linAct(42, 43, A0);
 //stepperMotor(int pinE, int pinD, int pinPulse, int limSwiMax, int limSwiMin
 
-stepperMotor xAxis = stepperMotor(30, 32, 4, 48, 47);
+stepperMotor x0= stepperMotor(30, 32, 4, 48, 47);
 stepperMotor yAxis = stepperMotor(37, 39, 13, 44, 45);
+
 void loop() {
-  xAxis.pwm = 10;
-  xAxis.dir = 1;
-  xAxis.spin();
-  yAxis.pwm = 10;
-  yAxis.dir = 1;
-  yAxis.spin();
+if (Serial.available() > 0){
+  String in = Serial.readString();
+ inputControl(in);
+}
+  x0.spin();
   delay(3000);
-  xAxis.dir = 0;
-  xAxis.spin();
-  yAxis.dir = 0;
-  yAxis.spin();
-  delay(3000);
-
-
-
   /*
     if (SerialUSB.available()) {
       int inByte = SerialUSB.read();
@@ -80,12 +79,22 @@ void loop() {
     // read from port 0, send to port 1:
   */
 }
+/*
 
+    Serial.print("die temp  " );
+  Serial.println( tmp.readDieTempC());
+  Serial.print("obj temp  ");
+  Serial.println(tmp.readObjTempC());
+  Serial.print("raw temp " );
+  Serial.println(tmp.readRawDieTemperature());
+  delay(4000);
+
+*/
 ISR(TIMER1_COMPA_vect) {
   //Interrupt Service Routine, Timer/Counter1 Compare Match A
   seconds++;
   if (seconds >= 10) { //set to however many seconds you want
-    Serial.println(micros());           // This code is what happens
+    Serial.println("10");           // This code is what happens
     seconds = 0;                        // after 'x' seconds
     digitalWrite(53, !digitalRead(53)); //
   }

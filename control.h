@@ -1,12 +1,12 @@
 #include <LiquidCrystal.h>
 #include <stdio.h>
 #include <Arduino.h>
-
 // this is neccesary so it does not add multiple times
 #ifndef control_h
 #define control_h
 #include"sensors.h"
 #include "max6675.h"
+#include "Adafruit_TMP007.h"
 
 void inputControl(String input);
 void stepperControl(String command);

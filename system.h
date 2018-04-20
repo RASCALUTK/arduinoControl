@@ -11,9 +11,10 @@ class project {
     relay drillMotor;
     relay pump;
     relay heater;
-    stepperMotor xAxis;
-    stepperMotor yAxis;
-    stepperMotor zAxis;
+    stepperMotor x0;
+    stepperMotor x1;
+    stepperMotor y;
+    stepperMotor z;
     linAct holder;
     tempSense heatTemp;
     forceSensor bitForce;
