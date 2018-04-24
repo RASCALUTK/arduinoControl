@@ -5,28 +5,38 @@
 #define system_h
 
 class project {
-  public
-  
-  //all parts needed as of now
-    relay drillMotor;
-    relay pump;
-    relay heater;
-    stepperMotor x0;
-    stepperMotor x1;
-    stepperMotor y;
-    stepperMotor z;
-    linAct holder;
-    tempSense heatTemp;
-    forceSensor bitForce;
-    forceSensor holdertemp;
-    wattMeter meter;
-    
+  public:
+
+    //all parts needed as of now
+    //vfd drillMotor;
+    //   relay pump;
+    //   relay heater;
+    stepperMotor x0 = stepperMotor(30, 32, 4, 48, 47);;
+    //  stepperMotor x1;
+    //   stepperMotor y;
+    //  stepperMotor z;
+    //  linAct holder;
+    //  MAX6675 heatTemp;
+    //  forceSensor bitForce;
+    //  forceSensor holdertemp;
+    //  wattMeter meter;
+
     project();
+
     String axisCoords();
     String forces();
     String powerlevels();
-    
-    
+
+    void inputControl(String input);
+    void stepperControl(String command);
+    void vfdControl(String command);
+    void heaterControl(String command);
+    void linActControl(String command);
+    void thermoControl(String command);
+    void pumpControl(String command);
+    void forceControl(String command);
+
+
 };
 
 

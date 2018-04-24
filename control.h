@@ -8,14 +8,6 @@
 #include "max6675.h"
 #include "Adafruit_TMP007.h"
 
-void inputControl(String input);
-void stepperControl(String command);
-void vfdControl(String command);
-void heaterControl(String command);
-void linActControl(String command);
-void thermoControl(String command);
-void pumpControl(String command);
-void forceControl(String command);
 
 class stepperMotor {
   public:
@@ -80,7 +72,10 @@ class relay {
     bool onOff;
     void set(int x);
 };
-
-
+class vfd {
+  public:
+    int speedPin, forwardPin, jogPin;
+    vfd(int r, int j, int an);
+};
 // ends the if definiton statement
 #endif

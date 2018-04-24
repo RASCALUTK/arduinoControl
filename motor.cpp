@@ -104,6 +104,7 @@ void stepperMotor::enableDisable() {
     digitalWrite(pinEnable, LOW);
   } else {
     digitalWrite(pinEnable, HIGH);
+    //analogWrite(pinPul,255);
   }
   return;
 }
