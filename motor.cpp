@@ -13,54 +13,51 @@ stepperMotor::stepperMotor(int pinE, int pinD, int pinPulse, int limSwiMax, int 
   //pwm pin TEST THIS ON multiple motors
   pinPul = pinPulse;
   pinMode(pinPul, OUTPUT);
-  pwm = 10;
+  pwm = 255;
 
   //limit swithces
   pinLimMin = limSwiMin;
   pinLimMax = limSwiMax;
   pinMode (pinLimMin, INPUT);
   pinMode (pinLimMax, INPUT);
-
+  isMinMax();
   dir = true;
+  prevDir = dir;
   enable = false;
   enableDisable();
   //checks to see if it is on the end
-  isMinMax();
   return;
 }
 
-void stepperMotor::direc() {
-  enable = false;
-  enableDisable();
-  delay(2);
-  if (dir) {
+void stepperMotor::dirChange() {
+  if (dir && dir != prevDir) {
+    digitalWrite(pinDir, HIGH);
+  } else {
     digitalWrite(pinDir, LOW);
   }
-  else {
-    digitalWrite(pinDir, HIGH);
-  }
-  delay(2);
-  enable = true;
-  enableDisable();
+  prevDir = dir;
   return;
 }
 
 void stepperMotor::spin() {
   isMinMax();
-  if ((isMax && dir ) || (isMin && !dir)) {
+  if ((isMax && dir) || (isMin && !dir)) {
+    digitalWrite(pinEnable, HIGH);
     return;
   }
-  direc();
   analogWrite(pinPul, pwm);
   return;
 }
-
+void stepperMotor::stopM() {
+  digitalWrite(pinEnable, HIGH);
+  return;
+}
 
 void stepperMotor::isMinMax() {
-  if (pinLimMax == HIGH) {
+  if (digitalRead(pinLimMax) == HIGH) {
     isMax = true;
     return;
-  } else if (pinLimMin == HIGH) {
+  } else if (digitalRead(pinLimMin) == HIGH) {
     isMin = true;
     return;
   }
@@ -100,11 +97,10 @@ void stepperMotor::pwmSet(int newPwm) {
 
 
 void stepperMotor::enableDisable() {
-  if (enable) {
+  if (enable && (!isMin || !isMax)) {
     digitalWrite(pinEnable, LOW);
   } else {
     digitalWrite(pinEnable, HIGH);
-    //analogWrite(pinPul,255);
   }
   return;
 }
@@ -124,13 +120,4 @@ void stepperMotor::stepM() {
 
   }
 }
-
-// this is a really shitty way of doing this but it does work.
-void stepperMotor::badPwm() {
-  stepM();
-  delay(delayTime);
-  stepM();
-  return;
-}
-
 

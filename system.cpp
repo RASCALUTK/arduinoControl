@@ -1,33 +1,13 @@
 #include "system.h"
 
 project::project() {
-  // Adafruit_TMP007 tmp(0x40);
-
-  //x0
-  /*
-    vfd drillMotor;
-    relay pump;
-    relay heater;
-    //stepperMotor(int pinE, int pinD, int pinPulse, int limSwiMax, int limSwiMin
-    stepperMotor x0;
-    stepperMotor x1;
-    stepperMotor y;
-    stepperMotor z;
-    linAct holder;
-    MAX6675 heatTemp;
-    forceSensor bitForce;
-    forceSensor holdertemp;
-    wattMeter meter;
-  */
-
   return;
 }
 
 
 void project::inputControl(String input) {
-  char  firstLetter = input[0];
 
-  switch (firstLetter) {
+  switch (input[0]) {
 
     //stepper
     case 'S' :
@@ -65,6 +45,8 @@ void project::inputControl(String input) {
 
 
 void project::stepperControl(String command) {
+
+
   int temp;
   // get name
   temp = command.indexOf('_');
@@ -91,6 +73,7 @@ void project::stepperControl(String command) {
   if (sTemp = "SX0") {
     x0.pwm = pwm.toInt();
     x0.dir = dir.toInt();
+    //if(dir!=prevDir){x0.dirChange();)}
     x0.enable = onOff.toInt();
   } else if (sTemp = "SX1") {
     //x1.pwm = pwm.toInt();

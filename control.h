@@ -15,7 +15,7 @@ class stepperMotor {
     int  pinDir, pinEnable, pinPul, pinLimMin, pinLimMax;
     //variables
     int posMax, posMin, pos, pwm, delayTime;
-    bool dir, enable, isMax, isMin;
+    bool dir, enable, isMax, isMin, prevDir;
     stepperMotor(int pinE, int pinD, int pinPulse, int limSwiMax, int limSwiMin);
     //spins motor
     void spin();
@@ -29,7 +29,9 @@ class stepperMotor {
     void forward();
     void reverse();
     void badPwm();
-    void direc();
+    //void dirChange();
+    void dirChange();
+    void stopM();
 };
 
 class hBridge {

@@ -11,6 +11,7 @@ class project {
     //vfd drillMotor;
     //   relay pump;
     //   relay heater;
+    //(int pinE, int pinD, int pinPulse, int limSwiMax, int limSwiMin)
     stepperMotor x0 = stepperMotor(30, 32, 4, 48, 47);;
     //  stepperMotor x1;
     //   stepperMotor y;

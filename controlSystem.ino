@@ -27,12 +27,24 @@ volatile int seconds = 0;
 project ice;
 
 void loop() {
-if (Serial.available() > 0){
-  String in = Serial.readString();
- ice.inputControl(in);
-}
+  if (Serial.available() > 0) {
+    String in = Serial.readString();
+    //ice.inputControl(in);
+  }
+  //analogWrite(4,2);
+  ice.x0.pwm = 5;
+  ice.x0.enable = 1;
+  ice.x0.enableDisable();
+  ice.x0.dir = 1;
+  ice.x0.dirChange();
+  ice.x0.spin();
   delay(3000);
-
+  ice.x0.stopM();
+  delay(1000);
+  ice.x0.dir = 0;
+  ice.x0.dirChange();
+  ice.x0.spin();
+  delay(3000);
 }
 
 ISR(TIMER1_COMPA_vect) {
