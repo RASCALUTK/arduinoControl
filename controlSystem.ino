@@ -32,19 +32,19 @@ void loop() {
     //ice.inputControl(in);
   }
   //analogWrite(4,2);
-  ice.x0.pwm = 5;
-  ice.x0.enable = 1;
-  ice.x0.enableDisable();
-  ice.x0.dir = 1;
-  ice.x0.dirChange();
-  ice.x0.spin();
-  delay(3000);
-  ice.x0.stopM();
+  ice.z.pwm = 5;
+  ice.z.enable = 1;
+  ice.z.enableDisable();
+  ice.z.dir = 1;
+  ice.z.dirChange();
+  ice.z.spin();
+  delay(900);
+  ice.z.stopM();
   delay(1000);
-  ice.x0.dir = 0;
-  ice.x0.dirChange();
-  ice.x0.spin();
-  delay(3000);
+  ice.z.dir = 0;
+  ice.z.dirChange();
+  ice.z.spin();
+  delay(900);
 }
 
 ISR(TIMER1_COMPA_vect) {

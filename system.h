@@ -15,7 +15,7 @@ class project {
     stepperMotor x0 = stepperMotor(30, 32, 4, 48, 47);;
     //  stepperMotor x1;
     //   stepperMotor y;
-    //  stepperMotor z;
+     stepperMotor z;
     //  linAct holder;
     //  MAX6675 heatTemp;
     //  forceSensor bitForce;
