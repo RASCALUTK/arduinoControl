@@ -12,9 +12,9 @@ relay::relay(int p) {
 void relay::set(int x) {
   // I am using the normally open relay pins
   // that is the reason for this code
-  
+
   if (x == 1) {
-    // connecting the pin to HIGH will turn it off    
+    // connecting the pin to HIGH will turn it off
     onOff = true;
     digitalWrite(pin, HIGH);
     return;
@@ -24,6 +24,5 @@ void relay::set(int x) {
     digitalWrite(pin, LOW);
   }
   return;
-  
-}
 
+}

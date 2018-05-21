@@ -2,6 +2,10 @@
 #include "control.h"
 
 linAct::linAct(int pinA, int pinB, int pinC, int pinD) {
+  // pinA  = forward
+  // pinB = reverse 
+  // pin C = analog pin 
+  // pin D =  enable
   Serial.print("setup start");
   pinPot = pinC;
   pin1 = pinA;
@@ -24,7 +28,11 @@ void linAct::off() {
   hB->off();
   return;
 }
-
+void linAct::on() {
+  // uses the hBridge function
+  hB->on();
+  return;
+}
 void linAct::readVal() {
   potVal = analogRead(pinPot);
   return;
@@ -61,4 +69,43 @@ void linAct::toMax() {
   off();
   return;
 }
+
+
+/*
+ * hBridge::hBridge(int pinA, int pinB, int pinC) {
+  pinE = pinC;
+  pinMode(pinE, OUTPUT);
+  pin1 = pinA;
+  pinMode(pin1, OUTPUT);
+  pin2 = pinB;
+  pinMode(pin2, OUTPUT);
+  off();
+  return;
+}
+
+void hBridge::on() {
+  digitalWrite(pinE, HIGH);
+  return;
+}
+
+void hBridge::off() {
+  digitalWrite(pinE, LOW);
+  digitalWrite(pin1, LOW);
+  digitalWrite(pin2, LOW);
+  return;
+}
+
+void hBridge::forward() {
+  digitalWrite(pin2, LOW);
+  digitalWrite(pin1, HIGH);
+  on();
+  return;
+}
+
+void hBridge::reverse() {
+  digitalWrite(pin1, LOW);
+  digitalWrite(pin2, HIGH);
+  on();
+}
+*/
 

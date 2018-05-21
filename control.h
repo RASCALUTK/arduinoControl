@@ -53,6 +53,7 @@ class linAct {
     //constructor
     linAct(int pinA, int pinB, int pinC, int pinD);
     void off();
+    void on();
     void forward();
     void reverse();
     // toMin and toMax will stop all code until they reahc their end

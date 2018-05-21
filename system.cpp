@@ -4,92 +4,247 @@ project::project() {
   return;
 }
 
+void project::inputControl(void) {
+  // serial input
+  if (Serial.available() > 0 ) {
+    String input = Serial.readString();
+    switch (input[0]) {
 
-void project::inputControl(String input) {
+      //Sensors
+      //tempsensor
+      case 'T' :
+        Serial.println("T" + String(heatTemp.readCelsius()));
+        break;
 
-  switch (input[0]) {
+      //  currentsensor
+      case 'C' : {
+          ammeter.readCurrent();
+          Serial.println("C" + String(ammeter.ampsRMS));
+        }
+        break;
 
-    //stepper
-    case 'S' :
-      Serial.println("stepper");
-      break;
+      //  forcesensor
+      case 'F' : {
+          Serial.println("F0");
+        }
+        break;
 
-    //Linear actuator
-    case 'L' :
-      Serial.println("linear actuator");
-      break;
+      case 'X' : {
+          // get number -1 0 1
+          int number = (input.substring(1, input.length())).toInt();
+          // turn on/off
+          if (number == 0) {
+        //    Serial.println("off");
+            x0.pwm = 255;
+            x1.pwm = 255;
+            x0.enable = true;
+            x1.enable = true;
+            x0.enableDisable();
+            x1.enableDisable();
+            x0.spin();
+            x1.spin();
+          }
+          else if (number == -1) {
+            // turn off motors
+            x0.enable = false;
+            x1.enable = false;
+            x0.enableDisable();
+            x1.enableDisable();
+            // change direction
+            x0.dir = 1;
+            x1.dir = 1;
+            x0.dirChange();
+            x1.dirChange();
+            // set pwm
+            x0.pwm = 127;
+            x1.pwm = 127;
+            //re enable
+            x0.enable = true;
+            x1.enable = true;
+            x0.enableDisable();
+            x1.enableDisable();
+            // spin motors
+            x0.spin();
+            x1.spin();
+          } else if (number == 1) {
+          //  Serial.println("forward");
+            // turn off motors
+            x0.enable = false;
+            x1.enable = false;
+            x0.enableDisable();
+            x1.enableDisable();
+            // change direction
+            x0.dir = 0;
+            x1.dir = 0;
+            x0.dirChange();
+            x1.dirChange();
+            // set pwm
+            x0.pwm = 127;
+            x1.pwm = 127;
+            //re enable
+            x0.enable = true;
+            x1.enable = true;
+            x0.enableDisable();
+            x1.enableDisable();
+            // spin motors
+            x0.spin();
+            x1.spin();
+          } else {
+         //   Serial.println("Error: input not corret you fucking moron");
+          }
+          // direction change
+          // rotate if
+        }
+        break;
 
-    //pump
-    case 'P' :
-      Serial.println("pump");
-      break;
+      case 'Y' : {
+          // get number -1 0 1
+          int number = (input.substring(1, input.length())).toInt();
+          // turn on/off
+          if (number == 0) {
+          //  Serial.println("off");
+            // set pwm
+            y.pwm = 255;
+            //re enable
+            y.enable = true;
+            y.enableDisable();
+            // spin motors
+            y.spin();
+          }
+          else if (number == -1) {
+           // Serial.println("reverse");
+            y.enable = false;
+            y.enableDisable();
+            // change direction
+            y.dir = 1;
+            y.dirChange();
+            // set pwm
+            y.pwm = 127;
+            //re enable
+            y.enable = true;
+            y.enableDisable();
+            // spin motors
+            y.spin();
+          } else if (number == 1) {
+           // Serial.println("forward");
+            y.enable = false;
+            y.enableDisable();
+            // change direction
+            y.dir = 0;
+            y.dirChange();
+            // set pwm
+            y.pwm = 127;
+            //re enable
+            y.enable = true;
+            y.enableDisable();
+            // spin motors
+            y.spin();
+          } else {
+          //  Serial.println("Error: input not corret you fucking moron");
+          }
 
-    //heater
-    case 'H' :
-      Serial.println("heater");
-      break;
+        }
+        break;
 
-    //tempsensor
-    case 'T' :
-      Serial.println("Temp");
-      break;
+      case 'Z' : {
+          // get number -1 0 1
+          int number = (input.substring(1, input.length())).toInt();
+          // turn on/off
+          if (number == 0) {
+         //   Serial.println("off");
+          }
+          else if (number == -1) {
 
-    //un recognized input
-    default :
-      Serial.println("INPUT ERROR : " + input);
-      break;
+         //   Serial.println("reverse");
+          } else if (number == 1) {
+         //   Serial.println("forward");
+          } else {
+           // Serial.println("Error: input not corret you fucking moron");
+          }
+
+        }
+        break;
+
+      case 'L' : {
+          // get number -1 0 1
+          int number = (input.substring(1, input.length())).toInt();
+
+          // turn on/off
+          if (number == 0) {
+         //   Serial.println("off");
+            imd.off();
+          }
+          else if (number == -1) {
+         //   Serial.println("reverse");
+            imd.on();
+            imd.reverse();
+          } else if (number == 1) {
+         //   Serial.println("forward");
+            imd.on();
+            imd.forward();
+          } else {
+           // Serial.println("Error: input not corret you fucking moron");
+          }
+
+        }
+        break;
+
+      case 'H' : {
+          // get number  0 1
+          int number = (input.substring(1, input.length())).toInt();
+          // turn on/off
+          if (number == 0) {
+            Serial.println("off");
+          } else if (number == 1) {
+            Serial.println("heater on");
+          } else {
+            Serial.println("Error: input not corret you fucking moron");
+          }
+        }
+        break;
+
+
+      //unrecognized input
+      default :
+        Serial.println("INPUT ERROR : " + input);
+        break;
+    }
+
   }
-
   return;
 }
 
 
-void project::stepperControl(String command) {
+void project::xAxis(int num) {
 
+  if ( abs(num) == 255) {
 
-  int temp;
-  // get name
-  temp = command.indexOf('_');
-  String sTemp = command.substring(0, temp);
-  command = command.substring(temp, command.length());
-  Serial.println("name " + sTemp);
+    x0.enable = 0;
+    x1.enable = 0;
 
-  // get on off setting
-  temp = command.indexOf('_');
-  String onOff = command.substring(0, temp);
-  command = command.substring(temp, command.length());
-  Serial.println("on/Off: " + onOff);
-  // get pwm speed
-  temp = command.indexOf('_');
-  String pwm = command.substring(0, temp);
-  command = command.substring(temp, command.length());
-  Serial.println("pwm: " + pwm);
-  // get direction
-  temp = command.indexOf('_');
-  String dir = command.substring(0, temp);
-  command = command.substring(temp, command.length());
-  Serial.println("direction: " + dir);
-
-  if (sTemp = "SX0") {
-    x0.pwm = pwm.toInt();
-    x0.dir = dir.toInt();
-    //if(dir!=prevDir){x0.dirChange();)}
-    x0.enable = onOff.toInt();
-  } else if (sTemp = "SX1") {
-    //x1.pwm = pwm.toInt();
-    //x1.dir = dir.toInt;
-    //x1.enable = onOff.toInt();
-  } else if (sTemp  = "SY") {
-    //y.pwm = pwm.toInt();
-    //y.dir = dir.toInt;
-    //y.enable = onOff.toInt();
-  } else if (sTemp  = "SZ") {
-    //z.pwm = pwm.toInt();
-    //z.dir = dir.toInt;
-    //z.enable = onOff.toInt();
-  } else {
-    Serial.println("ERROR Name not recognized:" + sTemp);
   }
+  else if (num > 0) {
+
+    x0.dir = 1;
+    x1.dir = 1;
+
+  }
+  else {
+
+    x0.dir = 0;
+    x1.dir = 0;
+
+  }
+
+
+
+  x1.pwm = abs(num);
+  x0.pwm = abs(num);
+
+  x1.spin();
+  x0.spin();
+
+
   return;
 }
 
